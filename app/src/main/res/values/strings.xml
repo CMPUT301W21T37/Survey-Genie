@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Survey Genie</string>
+    <string name="search_experiment">Search</string>
+    <string name="search_field" translatable="false">Enter keywords</string>
+    <string name="add_experiment">Add experiment</string>
+    <string name="experiment_description">description(up to 40 characters):</string>
+    <string name="experiment_region">region(up to 10 characters):</string>
+    <string name="experiment_trial">minimum number of trials:</string>
 </resources>
