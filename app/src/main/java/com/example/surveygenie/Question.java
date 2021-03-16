@@ -10,6 +10,7 @@ public class Question  {
     public Question(User poster,String description) {
         this.user = poster;
         this.content = description;
+        this.replys= new ArrayList<Reply>(0);
     }
 
     public User getUser() {
@@ -28,5 +29,9 @@ public class Question  {
     }
     public void addReply(Reply reply){
         this.replys.add(reply);
+    }
+
+    public ArrayList<Reply> getReplys() {
+        return this.replys;
     }
 }

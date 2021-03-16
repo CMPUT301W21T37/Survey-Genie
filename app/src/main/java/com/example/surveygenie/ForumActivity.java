@@ -51,7 +51,7 @@ public class ForumActivity extends AppCompatActivity implements AddQuestion.OnIn
             public void onClick(View v) {
                 new AddQuestion().show(getSupportFragmentManager(),"ADD Question");
             }
-        }
+        });
 
     }
     public void onOkPressed(Question newQuestion) { questionAdapter.add(newQuestion); }

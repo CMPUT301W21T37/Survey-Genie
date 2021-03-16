@@ -1,4 +1,4 @@
 package com.example.surveygenie;
 
-public class ReplyList {
+public class Experiment {
 }
