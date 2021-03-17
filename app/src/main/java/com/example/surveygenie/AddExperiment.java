@@ -8,16 +8,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-public class AddExperiment extends DialogFragment {
+public class AddExperiment extends DialogFragment{
     private EditText experimentDescription;
     private EditText experimentRegion;
     private EditText experimentTrial;
+    private String experimentType;
+    RadioGroup radioGroup;
 
     private OnFragmentInteractionListener listener;
 
@@ -49,9 +53,20 @@ public class AddExperiment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.add_experiment, null);
+
         experimentDescription = view.findViewById(R.id.add_experiment_description);
         experimentRegion = view.findViewById(R.id.add_experiment_region);
         experimentTrial = view.findViewById(R.id.add_experiment_trial);
+
+        radioGroup = (RadioGroup)view.findViewById(R.id.radio_Group);
+        radioGroup.clearCheck();
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton radioButton = (RadioButton)group.findViewById(checkedId);
+                experimentType = radioButton.getText().toString();
+            }
+        });
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         return builder
@@ -65,7 +80,7 @@ public class AddExperiment extends DialogFragment {
                         String region = experimentRegion.getText().toString();
                         String trial = experimentTrial.getText().toString();
 
-                        listener.onOkPressed(new Experiment(description, region, trial));
+                        listener.onOkPressed(new Experiment(description, region, trial,experimentType));
                     }
                 }).create();
 

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="Description"
-        android:textSize="35sp">
+        android:textSize="30sp">
     </TextView>
 
     <TextView
@@ -33,35 +33,13 @@
         android:text="Minimum number of trials"
         android:textSize="30sp"></TextView>
 
-    <RadioGroup
-        android:id="@+id/radio_Group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <RadioButton
-            android:id="@+id/radio_Counts"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Counts"/>
-
-        <RadioButton
-            android:id="@+id/radio_Binomial_Trials"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Binomial Trials"/>
-
-        <RadioButton
-            android:id="@+id/radio_NonNegative_Integer_Counts"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="NonNegative Integer Counts" />
-
-        <RadioButton
-            android:id="@+id/radio_Measurement_Trials"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Measurement Trials" />
-    </RadioGroup>
+    <TextView
+        android:id="@+id/experiment_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Type"
+        android:textSize="30sp"></TextView>
 
     <Button
         android:id="@+id/save_experiment_button"

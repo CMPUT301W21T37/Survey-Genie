@@ -35,4 +35,34 @@
         android:autofillHints="@string/experiment_trial"
         android:inputType="number" />
 
+    <RadioGroup
+        android:id="@+id/radio_Group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:id="@+id/radio_Counts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Counts"/>
+
+        <RadioButton
+            android:id="@+id/radio_Binomial_Trials"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Binomial Trials"/>
+
+        <RadioButton
+            android:id="@+id/radio_NonNegative_Integer_Counts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NonNegative Integer Counts" />
+
+        <RadioButton
+            android:id="@+id/radio_Measurement_Trials"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Measurement Trials" />
+    </RadioGroup>
+
 </LinearLayout>

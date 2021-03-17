@@ -46,13 +46,13 @@ public class MainActivity extends AppCompatActivity implements AddExperiment.OnF
                 String tempDesp = experimentDataList.get(position).getDescription();
                 String tempRegion = experimentDataList.get(position).getRegionName();
                 String tempTrial = experimentDataList.get(position).getTrialNumber();
-                /*String tempType = experimentDataList.get(position).getTypeName();*/
+                String tempType = experimentDataList.get(position).getTypeName();
 
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
                 intent.putExtra("Description",tempDesp);
                 intent.putExtra("Region",tempRegion);
                 intent.putExtra("Trial",tempTrial);
-                /*bundle.putString("Type",tempType);*/
+                intent.putExtra("Type",tempType);
                 startActivity(intent);
             }
         });

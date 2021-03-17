@@ -39,12 +39,12 @@ public class CustomList extends ArrayAdapter<Experiment> {
         TextView description = view.findViewById(R.id.experiment_description);
         TextView regionName = view.findViewById(R.id.experiment_region);
         TextView trialNumber = view.findViewById(R.id.experiment_trial);
-        /*TextView typeName = view.findViewById(R.id.experiment_type);*/
+        TextView typeName = view.findViewById(R.id.experiment_type);
 
         description.setText(experiment.getDescription());
         regionName.setText(experiment.getRegionName());
         trialNumber.setText(experiment.getTrialNumber());
-        /*typeName.setText(experiment.getTypeName());*/
+        typeName.setText(experiment.getTypeName());
 
 
         return view;

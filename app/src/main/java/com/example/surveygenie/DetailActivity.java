@@ -18,7 +18,8 @@ public class DetailActivity extends AppCompatActivity {
     TextView description;
     TextView region;
     TextView trial;
-    RadioGroup radioGroup;
+    TextView type;
+    /*RadioGroup radioGroup;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,24 +29,27 @@ public class DetailActivity extends AppCompatActivity {
         description = (TextView)findViewById(R.id.experiment_description);
         region = (TextView) findViewById(R.id.experiment_region);
         trial = (TextView) findViewById(R.id.experiment_trial);
+        type = (TextView) findViewById(R.id.experiment_type);
 
         Intent intent = getIntent();
         String tempDesp = intent.getStringExtra("Description");
         String tempRegion = intent.getStringExtra("Region");
         String tempTrial = intent.getStringExtra("Trial");
+        String tempType = intent.getStringExtra("Type");
 
         description.setText(tempDesp);
         region.setText(tempRegion);
         trial.setText(tempTrial);
+        type.setText(tempType);
 
-        radioGroup = (RadioGroup)findViewById(R.id.radio_Group);
+        /*radioGroup = (RadioGroup)findViewById(R.id.radio_Group);
         radioGroup.clearCheck();
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 RadioButton radioButton = (RadioButton)group.findViewById(checkedId);
             }
-        });
+        });*/
 
         final Button saveButton = findViewById(R.id.save_experiment_button);
     }
