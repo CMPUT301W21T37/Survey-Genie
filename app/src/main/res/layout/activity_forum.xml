@@ -2,30 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ForumActivity">
 
-
     <TextView
-        android:id="@+id/experimentTitle"
-        android:layout_width="wrap_content"
+        android:id="@+id/forum_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="An Experiment" />
-
+        android:text="Experiment " />
 
     <ListView
-        android:id="@+id/question_list"
+        android:id="@+id/post_list"
         android:layout_width="match_parent"
-        android:layout_height="665dp" />
+        android:layout_height="610dp">
+
+    </ListView>
 
     <Button
-        android:id="@+id/add_q_button"
-        android:layout_width="wrap_content"
+        android:id="@+id/add_question_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:rotationY="0"
-        android:text="Add Question" />
+        android:text="New Question" />
 
 </LinearLayout>

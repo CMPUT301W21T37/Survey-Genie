@@ -1,58 +1,71 @@
 package com.example.surveygenie;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.PostProcessor;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
-
 import java.util.ArrayList;
-import java.util.Collections;
 
-public class ForumActivity extends AppCompatActivity implements AddQuestion.OnInteractionLisnter{
-    private String eTitle;
-    ListView postList;
-    ArrayList<Question> postedQuestionList;
-    ArrayAdapter<Question> questionAdapter;
+public class ForumActivity extends AppCompatActivity {
 
+    TextView forumTitle;
+    ListView forumList;
+    ArrayAdapter<Question> forumAdapter;
+    ArrayList<Question> forumDataList;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forum);
 
+
+        //initialize forum
+        //title
+        forumTitle = (TextView) findViewById(R.id.forum_title);
         Intent intent = getIntent();
-        TextView experimentSelected = (TextView)findViewById(R.id.experimentTitle);
-        eTitle = intent.getStringExtra("ExperimentTile");
-        experimentSelected.setText(eTitle);
-
-
-        //Set Adapterview
-        postList = findViewById(R.id.question_list);
-        postedQuestionList = new ArrayList<>() ;
-        Experiment experiment = Experiment.getExperiment(eTitle);
-        questionAdapter= new PostList(this, postedQuestionList);
-        postList.setAdapter(questionAdapter);//not set up
-
-        //ADD question
-        Button addQuestionButton = (Button)findViewById(R.id.add_q_button);//add question
-        if (experiment.isOwner(user.id)){//if owner can't add
-            addQuestionButton.setVisibility(View.GONE);
-        }
-        addQuestionButton.setOnClickListener(new View.OnClickListener() {
+        String tempDesp = intent.getStringExtra("Description");
+        forumTitle.setText(tempDesp);
+        //listview
+        forumList = findViewById(R.id.post_list);
+        forumDataList = new ArrayList<>();
+        Question q = new Question("Why");
+        forumDataList.add(q);
+        forumAdapter = new CustomForumList(this,forumDataList);
+        forumList.setAdapter(forumAdapter);
+        //button
+        final Button addpostButton = (Button) findViewById(R.id.add_question_button);
+        addpostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AddQuestion().show(getSupportFragmentManager(),"ADD Question");
+                final View view = getLayoutInflater().inflate(R.layout.add_post_layout, null);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ForumActivity.this);
+                builder
+                        .setView(view)
+                        .setTitle("ADD QUESTION")
+                        .setNegativeButton("Cancel", null)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                EditText edit = view.findViewById(R.id.add_post_editText);
+                                Question question = new Question(edit.getText().toString());
+                                forumDataList.add(question);
+                                forumAdapter.notifyDataSetChanged();
+                            }
+                        }).create();
+                builder.show();
+
             }
         });
 
     }
-    public void onOkPressed(Question newQuestion) { questionAdapter.add(newQuestion); }
 }
