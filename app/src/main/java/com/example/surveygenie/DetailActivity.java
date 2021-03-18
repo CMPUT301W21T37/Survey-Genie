@@ -51,7 +51,7 @@ public class DetailActivity extends AppCompatActivity {
             }
         });*/
 
-        final Button saveButton = findViewById(R.id.save_experiment_button);
+        /*final Button saveButton = findViewById(R.id.save_experiment_button);*/
     }
 
 }

@@ -9,6 +9,15 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/user_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:clickable="true"
+        app:backgroundTint="#00BCD4"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+
     <ListView
         android:id="@+id/experiment_list"
         android:layout_width="match_parent"

@@ -18,6 +18,12 @@
         </activity>
         <activity android:name=".DetailActivity">
         </activity>
+        <activity android:name=".CreateUserActivity">
+        </activity>
+        <activity android:name=".UserProfileActivity">
+        </activity>
+
+
     </application>
 
 </manifest>
