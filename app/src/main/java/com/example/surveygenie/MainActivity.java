@@ -7,19 +7,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 
 import java.util.ArrayList;
 import java.util.UUID;
-
-import static java.sql.DriverManager.println;
 
 
 public class MainActivity extends AppCompatActivity implements AddExperiment.OnFragmentInteractionListener{
@@ -28,8 +25,6 @@ public class MainActivity extends AppCompatActivity implements AddExperiment.OnF
     ArrayAdapter<Experiment> experimentAdapter;
     ArrayList<Experiment> experimentDataList;
     SharedPreferences preference;
-    ArrayList<User> owners;
-    ArrayList<User> experimenters;
     User user;
 
 
@@ -37,39 +32,19 @@ public class MainActivity extends AppCompatActivity implements AddExperiment.OnF
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
-        //retrive username if previously saved on this mobile device.
-        preference = getSharedPreferences("username",MODE_PRIVATE);
-        String userid= preference.getString("UserID",null);
-        user = new User(userid);
-        //if username don't exist , go to welcome page for a new user.
-        if (userid == null){
-            setContentView(R.layout.create_user);//go to layout for setting up user
-            SharedPreferences.Editor editor = preference.edit();
-            String uID = UUID.randomUUID().toString();//give user a random unique id
-            editor.putString("UserID",uID );//load this unique id into preferences
-            editor.commit();//save
-            user = new User(uID);//create a user with this unique uid
-            //click on experimenter
-            final Button asExperimenter = findViewById(R.id.as_experimenter);
-            asExperimenter.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    experimenters.add(user);
-                }
-            });
-            //click on owner
-            final Button asOwner =findViewById(R.id.as_owner);
-            asOwner.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    owners.add(user);
-                }
-            });
-        }
-
         setContentView(R.layout.activity_main);//initialize mainactivity
 
+        //retrive username
+        preference = getSharedPreferences("username",MODE_PRIVATE);
+
+        //if key existi move on, if don't create a new one
+        if (!preference.contains("UserID")){
+            Intent intent = new Intent(MainActivity.this,CreateUserActivity.class);
+            startActivity(intent);
+            //go to activity for setting up user
+        }
+        String userid= preference.getString("UserID",null);
+        user = new User(userid);
         experimentList = findViewById(R.id.experiment_list);
         //connect to db , owner connected owned experiment, experimenter connec to subscribed experiment
         experimentDataList = new ArrayList<>();
@@ -90,9 +65,8 @@ public class MainActivity extends AppCompatActivity implements AddExperiment.OnF
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                setContentView(R.layout.options_layout);
                 String tempDesp = experimentDataList.get(position).getDescription();
-                Intent intent = new Intent(MainActivity.this,ForumActivity.class);
+                Intent intent = new Intent(MainActivity.this,OptionsActivity.class);
                 intent.putExtra("Description",tempDesp);
                 startActivity(intent);
 

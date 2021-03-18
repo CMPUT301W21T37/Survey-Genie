@@ -38,7 +38,7 @@ public class ForumActivity extends AppCompatActivity {
         forumTitle.setText(tempDesp);
         //listview
         forumList = findViewById(R.id.reply_list);
-        forumDataList = new ArrayList<>();
+        forumDataList = new ArrayList<>();//load from db related to experiment
         Question q = new Question("Why");
         forumDataList.add(q);
         forumAdapter = new CustomForumList(this,forumDataList);
@@ -67,7 +67,7 @@ public class ForumActivity extends AppCompatActivity {
 
             }
         });
-        //click on clicklistener
+        //adpater view on clicklistener
         forumList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -78,7 +78,14 @@ public class ForumActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        //back button
+        final Button backToOptionButton =(Button) findViewById(R.id.back_to_option_button);
+        backToOptionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
     }
