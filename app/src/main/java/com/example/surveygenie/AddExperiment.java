@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -16,18 +17,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+
 public class AddExperiment extends DialogFragment{
     private EditText experimentDescription;
     private EditText experimentRegion;
     private EditText experimentTrial;
     private String experimentType;
     RadioGroup radioGroup;
-
     private OnFragmentInteractionListener listener;
 
     public interface OnFragmentInteractionListener {
         void onOkPressed(Experiment newExperiment);
     }
+
 
     static AddExperiment newInstance(Experiment experiment) {
         Bundle args = new Bundle();
@@ -69,20 +71,20 @@ public class AddExperiment extends DialogFragment{
         });
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        return builder
-                .setView(view)
-                .setTitle("Add Experiment")
-                .setNegativeButton("Cancel", null)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        String description = experimentDescription.getText().toString();
-                        String region = experimentRegion.getText().toString();
-                        String trial = experimentTrial.getText().toString();
-
-                        listener.onOkPressed(new Experiment(description, region, trial,experimentType));
-                    }
-                }).create();
+        builder.setView(view);
+        builder.setTitle("Add Experiment");
+        builder.setNegativeButton("Cancel", null);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String description = experimentDescription.getText().toString();
+                String region = experimentRegion.getText().toString();
+                String trial = experimentTrial.getText().toString();
+                Experiment expt = new Experiment(description, region, trial, experimentType);
+                listener.onOkPressed(expt.uploadtodatabase());
+            }
+        });
+        return builder.create();
 
     }
 }
