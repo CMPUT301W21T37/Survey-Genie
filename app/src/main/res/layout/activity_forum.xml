@@ -8,13 +8,13 @@
     tools:context=".ForumActivity">
 
     <TextView
-        android:id="@+id/forum_title"
+        android:id="@+id/question_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Experiment " />
 
     <ListView
-        android:id="@+id/post_list"
+        android:id="@+id/reply_list"
         android:layout_width="match_parent"
         android:layout_height="610dp">
 

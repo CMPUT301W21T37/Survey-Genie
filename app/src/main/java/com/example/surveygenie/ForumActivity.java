@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +23,7 @@ public class ForumActivity extends AppCompatActivity {
     ArrayAdapter<Question> forumAdapter;
     ArrayList<Question> forumDataList;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,12 +32,12 @@ public class ForumActivity extends AppCompatActivity {
 
         //initialize forum
         //title
-        forumTitle = (TextView) findViewById(R.id.forum_title);
+        forumTitle = (TextView) findViewById(R.id.question_title);
         Intent intent = getIntent();
         String tempDesp = intent.getStringExtra("Description");
         forumTitle.setText(tempDesp);
         //listview
-        forumList = findViewById(R.id.post_list);
+        forumList = findViewById(R.id.reply_list);
         forumDataList = new ArrayList<>();
         Question q = new Question("Why");
         forumDataList.add(q);
@@ -66,6 +67,19 @@ public class ForumActivity extends AppCompatActivity {
 
             }
         });
+        //click on clicklistener
+        forumList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(ForumActivity.this,ReplyAcitivity.class);
+                // set up question to be passed on
+                Question question = forumDataList.get(position);
+                intent.putExtra("Question",question);
+                startActivity(intent);
+            }
+        });
+
+
 
     }
 }

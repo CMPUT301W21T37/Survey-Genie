@@ -29,10 +29,10 @@ public class ReplyList extends ArrayAdapter<Reply> {
         View view = convertView;
 
         if(view == null){
-            view = LayoutInflater.from(context).inflate(R.layout.reply_content, parent,false);
+            view = LayoutInflater.from(context).inflate(R.layout.forum_content, parent,false);
         }
         Reply reply = (Reply) replys.get(position);
-        TextView replyText = view.findViewById(R.id.reply_text);
+        TextView replyText = view.findViewById(R.id.post_text);
         replyText.setText(reply.getReply());
         return view;
     }

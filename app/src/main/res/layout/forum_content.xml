@@ -7,22 +7,12 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/question_text"
-        android:layout_width="295dp"
-        android:layout_height="54dp"
+        android:id="@+id/post_text"
+        android:layout_width="403dp"
+        android:layout_height="59dp"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/add_reply_button"
-        android:layout_width="115dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
-        android:text="ADD REPLY"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/question_text"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
