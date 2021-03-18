@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements AddExperiment.OnF
         setContentView(R.layout.activity_main);//initialize mainactivity
 
         //retrive username
+        getSharedPreferences("username",MODE_PRIVATE).edit().clear().apply();
         preference = getSharedPreferences("username",MODE_PRIVATE);
 
         //if key existi move on, if don't create a new one

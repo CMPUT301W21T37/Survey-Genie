@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SurveyGenie">
-        <activity android:name=".ReplyActivity"></activity>
+        <activity android:name=".OptionsActivity"></activity>
+        <activity android:name=".CreateUserActivity" />
+        <activity android:name=".ReplyAcitivity" />
+        <activity android:name=".ReplyActivity" />
         <activity android:name=".ForumActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
