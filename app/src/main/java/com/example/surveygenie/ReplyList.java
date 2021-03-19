@@ -12,17 +12,19 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+/*List for replys*/
 public class ReplyList extends ArrayAdapter<Reply> {
     private ArrayList replys;
     private Context context;
 
-
+    /*Filled in replys*/
     public ReplyList(Context context, ArrayList<Reply> replys) {
         super(context,0,replys);
         this.replys = replys;
         this.context = context;
     }
 
+    /*Set view for replys*/
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

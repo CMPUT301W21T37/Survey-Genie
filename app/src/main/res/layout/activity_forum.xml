@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="Experiment " />
+        android:text="Experiment "
+        android:textSize="30dp"/>
 
     <ListView
         android:id="@+id/reply_list"
@@ -23,14 +24,18 @@
 
     <Button
         android:id="@+id/add_question_button"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Question" />
+        android:layout_gravity="center_horizontal"
+        android:text="New Question"
+        app:backgroundTint="#03A9F4" />
 
     <Button
         android:id="@+id/back_to_option_button"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back" />
+        android:layout_gravity="center_horizontal"
+        android:text="Back"
+        app:backgroundTint="#03A9F4" />
 
 </LinearLayout>

@@ -14,47 +14,49 @@ import java.util.HashMap;
 import java.util.Map;
 import static android.content.ContentValues.TAG;
 
+/*Information for a user*/
 public class User implements Serializable {
     private String id;
-    private String contact;
     private String role;
+    private String contact;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    User(String id,String contact){
+    /*Fill in attributes for a user*/
+    User(String id, String role, String contact){
         this.id = id;
+        this.role = role;
         this.contact = contact;
     }
 
+    /*Upload data for the user to the forestore*/
     public User upLoadToDatabase(){
         Map<String,Object> users = new HashMap<>();
         users.put("UserId", id);
+        users.put("UserRole", role);
         users.put("UserContactInfo", contact);
-        db.collection("users")
-                .add(users)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        db.collection("users").document(id)
+                .set(users)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
+                        Log.w(TAG, "Error writing document", e);
                     }
                 });
         return this;
     }
 
-    void setRole(String role){
-        this.role = role;
-    }
-
-    void setContact(String contact){
-        this.contact = contact;
-    }
-
+    /*Get id of a user*/
     String getId(){ return this.id; }
 
+    /*Get role of a user*/
+    String getRole(){ return this.role; }
+
+    /*Get contact information of a user*/
     String getContact(){ return this.contact; }
 }

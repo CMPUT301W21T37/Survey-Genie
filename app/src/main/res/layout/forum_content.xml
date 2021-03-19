@@ -8,11 +8,12 @@
 
     <TextView
         android:id="@+id/post_text"
-        android:layout_width="403dp"
-        android:layout_height="59dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="25dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

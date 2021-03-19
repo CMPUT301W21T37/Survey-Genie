@@ -17,7 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-
+/*Use DialogFragment to add a new experiment*/
 public class AddExperiment extends DialogFragment{
     private EditText experimentDescription;
     private EditText experimentRegion;
@@ -26,6 +26,7 @@ public class AddExperiment extends DialogFragment{
     RadioGroup radioGroup;
     private OnFragmentInteractionListener listener;
 
+    /*Show a interface about add a new experiment*/
     public interface OnFragmentInteractionListener {
         void onOkPressed(Experiment newExperiment);
     }
@@ -40,6 +41,7 @@ public class AddExperiment extends DialogFragment{
         return fragment;
     }
 
+    /*Check implement error*/
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -51,6 +53,7 @@ public class AddExperiment extends DialogFragment{
         }
     }
 
+    /*Set informations to add a new experiment*/
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -60,6 +63,7 @@ public class AddExperiment extends DialogFragment{
         experimentRegion = view.findViewById(R.id.add_experiment_region);
         experimentTrial = view.findViewById(R.id.add_experiment_trial);
 
+        /*Set and get type of a new experiment*/
         radioGroup = (RadioGroup)view.findViewById(R.id.radio_Group);
         radioGroup.clearCheck();
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

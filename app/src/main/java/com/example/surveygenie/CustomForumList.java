@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+/*List for forums about reply for questions*/
 public class CustomForumList extends ArrayAdapter<Question> {
 
     private ArrayList<Question> posts;
@@ -34,15 +35,13 @@ public class CustomForumList extends ArrayAdapter<Question> {
 
         Question question = posts.get(position);
 
-        //set up addpater
+        /*set up adapater*/
         TextView post = view.findViewById(R.id.post_text);
         post.setText(question.getQuestion());
-/*
 
 
 
-        //set up button
-*/
+        /*set up button*/
         return view;
     }
 }

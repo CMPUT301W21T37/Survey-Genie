@@ -16,6 +16,7 @@ import java.util.Map;
 
 import static android.content.ContentValues.TAG;
 
+/*Get attributes of an experiment and upload the data to the firestore*/
 public class Experiment implements Serializable {
     private String description;
     private String region;
@@ -23,6 +24,7 @@ public class Experiment implements Serializable {
     private String type;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    /*Set an experiment with attributes*/
     Experiment(String description, String region, String trial, String type){
         this.description = description;
         this.region = region;
@@ -30,34 +32,39 @@ public class Experiment implements Serializable {
         this.type = type;
     }
 
+    /*Upload data of experiments to the firestore*/
     public Experiment uploadtodatabase(){
         Map<String,Object> experiment = new HashMap<>();
         experiment.put("Description", description);
         experiment.put("Region", region);
         experiment.put("Trial", trial);
         experiment.put("Experiment Type", type);
-        db.collection("experiments")
-                .add(experiment)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        db.collection("experiments").document(description)
+                .set(experiment)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
+                        Log.w(TAG, "Error writing document", e);
                     }
                 });
         return this;
     }
 
+    /*Get description of an experiment*/
     String getDescription() { return this.description; }
 
+    /*Get region of an experiment*/
     String getRegionName(){ return this.region; }
 
+    /*Get minimum trials of an experiment*/
     String getTrialNumber() { return this.trial; }
 
+    /*Get type of an experiment*/
     String getTypeName() { return this.type; }
 }

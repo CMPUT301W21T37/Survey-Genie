@@ -1,24 +1,40 @@
 package com.example.surveygenie;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Question implements Parcelable {
+import static android.content.ContentValues.TAG;
+
+/*Question and its reply for a experiemnt*/
+public class Question implements Serializable {
     private String question;
+    private String experimentReference;
     private ArrayList<Reply> replys;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-
-    public Question(String question) {
+    public Question(String question,String experimentReference) {
         this.question = question;
+        this.experimentReference = experimentReference;
         this.replys = new ArrayList<Reply>();
     }
 
+    /*Get replys of a question*/
     public ArrayList<Reply> getReplys() {
         return replys;
     }
 
+    /*Add reply to the list of replys for a question*/
     public void addToReplys(Reply reply){
         this.replys.add(reply);
     }
@@ -27,43 +43,28 @@ public class Question implements Parcelable {
         return question;
     }
 
-
-    protected Question(Parcel in) {
-        question = in.readString();
-        if (in.readByte() == 0x01) {
-            replys = new ArrayList<Reply>();
-            in.readList(replys, Reply.class.getClassLoader());
-        } else {
-            replys = null;
-        }
+    /*Upload data to the firestore*/
+    public Question uploadtodatabase(){
+        /*may need to implement user later*/
+        Map<String,Object> quesitonObject = new HashMap<>();
+        quesitonObject.put("Question",question);
+        quesitonObject.put("Experiment",experimentReference);
+        db.collection("questions").document(question)
+                .set(quesitonObject)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
+        return this;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(question);
-        if (replys == null) {
-            dest.writeByte((byte) (0x00));
-        } else {
-            dest.writeByte((byte) (0x01));
-            dest.writeList(replys);
-        }
-    }
-
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Question> CREATOR = new Parcelable.Creator<Question>() {
-        @Override
-        public Question createFromParcel(Parcel in) {
-            return new Question(in);
-        }
-
-        @Override
-        public Question[] newArray(int size) {
-            return new Question[size];
-        }
-    };
 }

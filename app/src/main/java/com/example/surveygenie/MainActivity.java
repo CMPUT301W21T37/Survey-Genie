@@ -18,8 +18,11 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -33,6 +36,7 @@ import java.util.Map;
 
 import static android.content.ContentValues.TAG;
 
+/*Main page of the app and its functions*/
 public class MainActivity extends AppCompatActivity implements AddExperiment.OnFragmentInteractionListener{
 
     ListView experimentList;
@@ -47,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements AddExperiment.OnF
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         experimentList = findViewById(R.id.experiment_list);
         experimentDataList = new ArrayList<>();
         experimentAdapter = new CustomList(this, experimentDataList);
@@ -58,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements AddExperiment.OnF
             Intent intent = new Intent(MainActivity.this, CreateUserActivity.class);
             startActivity(intent);
         }
+
+        /*Get all experiments in firestore*/
         db.collection("experiments")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -77,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements AddExperiment.OnF
                     }
                 });
 
+        /*Click to user profile page*/
         userProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,47 +97,86 @@ public class MainActivity extends AppCompatActivity implements AddExperiment.OnF
                 }
             }
         });
+
+        /*Show adding a new experiment window*/
+        String role = prefs.getString("userRole",null);
+
         final Button addExperimentButton = findViewById(R.id.add_experiment_button);
 
         addExperimentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AddExperiment().show(getSupportFragmentManager(), "ADD_EXPERIMENT");
+                if (role.equals("Owner")) {
+                    new AddExperiment().show(getSupportFragmentManager(), "ADD_EXPERIMENT");
+                }else if (role.equals("Experimenter")) {
+                    final String warning = "As an experimenter, you can't publish experiment!";
+                    Toast.makeText(MainActivity.this, warning, Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
+        final CollectionReference ref = db.collection("experiments");
+
+        /*Click to see experiment details and option function*/
         experimentList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 String tempDesp = experimentDataList.get(position).getDescription();
-                Intent intent = new Intent(MainActivity.this,OptionsActivity.class);
+                String tempRegion = experimentDataList.get(position).getRegionName();
+                String tempTrial = experimentDataList.get(position).getTrialNumber();
+                String tempType = experimentDataList.get(position).getTypeName();
+                Intent intent = new Intent(MainActivity.this,DetailActivity.class);
                 intent.putExtra("Description",tempDesp);
+                intent.putExtra("Region",tempRegion);
+                intent.putExtra("Trial",tempTrial);
+                intent.putExtra("Type",tempType);
                 startActivity(intent);
 
             }
         });
 
+        /*Unpublish an experiment*/
         experimentList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
-                new AlertDialog.Builder(MainActivity.this)
-                        .setTitle("Unpublish Experiment")
-                        .setNegativeButton("Cancel", null)
-                        .setPositiveButton("Unpublish", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int i) {
-                                experimentDataList.remove(position);
-                                experimentAdapter.notifyDataSetChanged();
-                            }
-                        }).show();
-
+                if (role.equals("Owner")) {
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("Unpublish Experiment")
+                            .setNegativeButton("Cancel", null)
+                            .setPositiveButton("Unpublish", new DialogInterface.OnClickListener() {
+                                @Override
+                                /*Delete in the firestore*/
+                                public void onClick(DialogInterface dialog, int i) {
+                                    final String experimentDesp = experimentDataList.get(position).getDescription();
+                                    db.collection("experiments").document(experimentDesp)
+                                            .delete()
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.w(TAG, "Error deleting document", e);
+                                                }
+                                            });
+                                    /*experimentDataList.remove(position);
+                                    experimentAdapter.notifyDataSetChanged();*/
+                                }
+                            }).show();
+                } else if (role.equals("Experimenter")) {
+                    final String warning = "As an experimenter, you can't unpublish experiment!";
+                    Toast.makeText(MainActivity.this, warning, Toast.LENGTH_SHORT).show();
+                }
                 return true;
             }
         });
     }
 
+    /*Confirm to add a new experiment*/
     @Override
     public void onOkPressed(Experiment newExperiment) { experimentAdapter.add(newExperiment); }
 

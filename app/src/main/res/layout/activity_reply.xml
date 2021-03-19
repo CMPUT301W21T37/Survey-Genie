@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="Question" />
+        android:text="Question"
+        android:textSize="30dp"/>
 
     <ListView
         android:id="@+id/reply_list"
@@ -23,14 +24,18 @@
 
     <Button
         android:id="@+id/add_reply_button"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Reply" />
+        android:layout_gravity="center_horizontal"
+        android:text="Add Reply"
+        app:backgroundTint="#03A9F4"/>
 
     <Button
         android:id="@+id/back_to_question_button"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back" />
+        android:layout_gravity="center_horizontal"
+        android:text="Back"
+        app:backgroundTint="#03A9F4"/>
 
 </LinearLayout>
