@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F6FBF7"
+    android:orientation="vertical"
+    tools:context=".GetLocationActivity">
+
+    <TextView
+        android:id="@+id/user_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="250dp"
+        android:text=""
+        android:textSize="15dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_location"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="50dp"
+        android:text="Latitude:"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/latTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_location"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="180dp"
+        android:text="Latitude will be here! "
+        android:textSize="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/latTextView"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="50dp"
+        android:text="Longitude:"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/lonTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/latTextView"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="180dp"
+        android:text="Longitude will be here! "
+        android:textSize="20dp"/>
+
+    <Button
+        android:id="@+id/map_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lonTextView"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:text="Map"
+        app:backgroundTint="#03A9F4" />
+
+</RelativeLayout>

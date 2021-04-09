@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Survey Genie</string>
+    <string name="search_experiment">Search</string>
+    <string name="search_field" translatable="false">Enter keywords</string>
+    <string name="add_experiment">Add experiment</string>
+    <string name="experiment_name">experiment(up to 20 characters):</string>
+    <string name="experiment_description">description(up to 200 characters):</string>
+    <string name="experiment_region">region(up to 10 characters):</string>
+    <string name="experiment_trial">minimum number of trials:</string>
+    <string name="Profile">Profile</string>
+    <string name="Username">Username:</string>
+    <string name="inputContactInfo">Contact Info:</string>
+    <string name="title_activity_view_profile">ViewProfile</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="qr_code">qr_code</string>
+    <string name="generate_qr_code">Generate QR Code</string>
+</resources>
