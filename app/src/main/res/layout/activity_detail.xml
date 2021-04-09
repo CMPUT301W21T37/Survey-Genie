@@ -41,14 +41,138 @@
         android:text="Type"
         android:textSize="30sp"></TextView>
 
-    <Button
-        android:id="@+id/save_experiment_button"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:clickable="true"
-        android:focusable="true"
-        android:text="Save"
-        app:backgroundTint="#349AEC" />
+        android:orientation="horizontal">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/scan_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#91D542"
+            android:clickable="true"
+            app:backgroundTint="@color/grey"
+            app:srcCompat="@mipmap/qrcode" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/get_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="260dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#91D542"
+            android:clickable="true"
+            app:backgroundTint="@color/grey"
+            app:srcCompat="@mipmap/location" />
+
+    </LinearLayout>
+
+
+    <ListView
+        android:id="@+id/trial_list"
+        android:layout_width="match_parent"
+        android:layout_height="300dp" >
+
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">>
+
+        <Button
+            android:id="@+id/unsub_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Unsubscribe"
+            app:backgroundTint="#03A9F4" />
+
+        <Button
+            android:id="@+id/forum_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Forum"
+            app:backgroundTint="#03A9F4" />
+
+        <Button
+            android:id="@+id/add_trial_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Add Trial"
+            app:backgroundTint="#03A9F4" />
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/statistic_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Statistic"
+                app:backgroundTint="#03A9F4" />
+
+            <Button
+                android:id="@+id/histogram_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Histogram"
+                app:backgroundTint="#03A9F4" />
+
+            <Button
+                android:id="@+id/plot_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Plot"
+                app:backgroundTint="#03A9F4" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/end_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="End"
+            app:backgroundTint="#03A9F4"
+            android:visibility="visible"/>
+
+        <Button
+            android:id="@+id/ban_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Ban"
+            app:backgroundTint="#03A9F4" />
+
+        <Button
+            android:id="@+id/location_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Location"
+            app:backgroundTint="#03A9F4" />
+    </LinearLayout>
 
 </LinearLayout>

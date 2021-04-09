@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+/*List for experiments*/
 public class CustomList extends ArrayAdapter<Experiment> {
 
     private ArrayList<Experiment> experiments;
@@ -24,6 +25,7 @@ public class CustomList extends ArrayAdapter<Experiment> {
     }
 
 
+    /*Fill in attributes*/
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -35,12 +37,13 @@ public class CustomList extends ArrayAdapter<Experiment> {
         }
 
         Experiment experiment = experiments.get(position);
-
+        TextView name = view.findViewById(R.id.experiment_name);
         TextView description = view.findViewById(R.id.experiment_description);
         TextView regionName = view.findViewById(R.id.experiment_region);
         TextView trialNumber = view.findViewById(R.id.experiment_trial);
         TextView typeName = view.findViewById(R.id.experiment_type);
 
+        name.setText(experiment.getName());
         description.setText(experiment.getDescription());
         regionName.setText(experiment.getRegionName());
         trialNumber.setText(experiment.getTrialNumber());

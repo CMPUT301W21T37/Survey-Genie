@@ -1,49 +1,72 @@
 package com.example.surveygenie;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import java.util.ArrayList;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.UUID;
 
+/*Welcome page to create a new user*/
 public class CreateUserActivity extends AppCompatActivity {
-    ArrayList<User> owners;
-    ArrayList<User> experimenters;
-    User user;
-    SharedPreferences preference;
+    TextView randomId;
+    SharedPreferences prefs;
+    RadioGroup roleGroup;
+    private String id;
+    private String role;
+    private String contact = null;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle savedInstance) {
+        super.onCreate(savedInstance);
         setContentView(R.layout.activity_create_user);
-        preference = getSharedPreferences("username",MODE_PRIVATE);
-        SharedPreferences.Editor editor = preference.edit();
-        String uID = UUID.randomUUID().toString();//give user a random unique id
-        editor.putString("UserID",uID );//load this unique id into preferences
-        editor.apply();//save
-        user = new User(uID);//create a user with this unique uid
-        //click on experimenter
-        final Button asExperimenter = findViewById(R.id.as_experimenter);
-        asExperimenter.setOnClickListener(new View.OnClickListener() {
+
+        /*Generate unique user id*/
+        prefs = getSharedPreferences("username",MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        randomId = findViewById(R.id.cur_user_id);
+        id = UUID.randomUUID().toString();
+        randomId.setText(id);
+        editor.putString("userID",id);
+        editor.commit();
+        editor.putBoolean("idCreated",true);
+        editor.commit();
+
+//        Toast.makeText(CreateUserActivity.this, id, Toast.LENGTH_SHORT).show();
+
+        /*Select user role*/
+        roleGroup = (RadioGroup)findViewById(R.id.select_role);
+        roleGroup.clearCheck();
+        roleGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                //experimenters.add(user);//do to db
-                finish();
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton radioButton = (RadioButton)group.findViewById(checkedId);
+                role = radioButton.getText().toString();
+                User user = new User(id,role,contact);
+                user.upLoadToDatabase();
+                editor.putString("userRole",role);
+                editor.commit();
             }
         });
-        //click on owner
-        final Button asOwner =findViewById(R.id.as_owner);
-        asOwner.setOnClickListener(new View.OnClickListener() {
+
+        /*Confirm and go to main activity*/
+        final Button confirmRole = findViewById(R.id.confirm_role_button);
+        confirmRole.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //owners.add(user);//do to db
+                Toast.makeText(CreateUserActivity.this, role, Toast.LENGTH_SHORT).show();
                 finish();
+                Intent intent = new Intent(CreateUserActivity.this,MainActivity.class);
+                startActivity(intent);
             }
         });
 
     }
-
 }

@@ -7,12 +7,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/grey">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/white">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/user_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:clickable="true"
+            app:backgroundTint="#E8FCFF"
+            app:srcCompat="@mipmap/user" />
+        <ImageView
+            android:id="@+id/search_click"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="70dp"
+            android:src="@mipmap/searc_bar" />
+
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/experiment_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp">
 
     </ListView>
 
@@ -23,8 +50,9 @@
         android:layout_gravity="bottom|center_horizontal"
         android:clickable="true"
         android:focusable="true"
-        android:text="@string/add_experiment"
-        app:backgroundTint="#349AEC">
+        android:text="ADD EXPERIMENT"
+        app:backgroundTint="#349AEC"
+        android:visibility="visible">
 
     </Button>
 
