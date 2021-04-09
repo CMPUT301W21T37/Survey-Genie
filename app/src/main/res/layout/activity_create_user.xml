@@ -14,9 +14,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+<<<<<<< HEAD
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"/>
+=======
+        z
+>>>>>>> origin/main
         <TextView
             android:id="@+id/welcome_message_line1"
             android:layout_width="wrap_content"
@@ -24,6 +28,7 @@
             android:layout_gravity="center_horizontal"
             android:text="Welcome to Survey Genie!"
             android:textSize="30sp" />
+<<<<<<< HEAD
         <TextView
             android:id="@+id/cur_user_id"
             android:layout_width="wrap_content"
@@ -31,17 +36,24 @@
             android:layout_gravity="center_horizontal"
             android:text=""
             android:textSize="15sp" />
+=======
+>>>>>>> origin/main
 
         <TextView
             android:id="@+id/welcome_message_line2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+<<<<<<< HEAD
             android:text="Please choose your role"
             android:textSize="25sp" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="10dp"/>
+=======
+            android:text="Please select a role"
+            android:textSize="30sp" />
+>>>>>>> origin/main
 
         <RadioGroup
             android:id="@+id/select_role"
@@ -74,11 +86,14 @@
 
         </Button>
 
+<<<<<<< HEAD
         <ImageView
             android:layout_width="350dp"
             android:layout_height="350dp"
             android:layout_marginLeft="30dp"
             android:src="@mipmap/background"/>
+=======
+>>>>>>> origin/main
     </LinearLayout>
 
 </RelativeLayout>
